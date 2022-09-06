@@ -41,3 +41,11 @@ jobs:
           labels: |
             meeting
             weekly
+
+
+      - name: create an issue
+        uses: dacbd/create-issue-action@main
+        with:
+          token: ${{ github.token }}
+          title: Simple test issue
+          body: my new issue
