@@ -16,36 +16,17 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
-  
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  check_modified_files:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-      
-      - name: Create an issue
-        uses: actions-ecosystem/action-create-issue@v1
+      - uses: actions/checkout@v2
+      - name: Verify Changed files
+        uses: tj-actions/verify-changed-files@v15
+        id: verify-changed-files
         with:
-          github_token: ${{ secrets.github_token }}
-          title: sssssss
-          body: |
-            ## This week's TODO
-
-            - [ ] Have a meeting with UX team
-            - [ ] Check the dashboard
-
-          labels: |
-            meeting
-            weekly
-
-
-      - name: create an issue
-        uses: dacbd/create-issue-action@main
-        with:
-          token: ${{ github.token }}
-          title: Simple test issue
-          body: my new issue
+          files: |
+            readme.md
+      - name: Run step only when readme.md changes
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
+        run: |
+          echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
