@@ -12,19 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Print variable values
+      
+      - name: Verify Changed files
+        uses: tj-actions/verify-changed-files@v15
+        id: verify-changed-files
+      
+      - name: List all changed files tracked and untracked files
         run: |
-          echo "Base SHA: ${{ github.event.pull_request.base.sha }}"
-          echo "Head SHA: ${{ github.event.pull_request.head.sha }}"
-      - name: Get list of modified files
-        id: modified_files
-        run: |
-          echo "::set-output name=files::$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }})"
-          echo "${{ steps.modified_files.outputs.files }}"
-      - name: Check if readme.md was modified
-        run: |
-          if echo "${{ steps.modified_files.outputs.files }}" | grep -q "README.md"; then
-            echo "readme.md was modified"
-          else
-            echo "readme.md was not modified"
-          fi
+          echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
