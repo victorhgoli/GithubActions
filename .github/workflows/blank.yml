@@ -26,6 +26,7 @@ jobs:
         with:
           files: |
              *.txt
+             README.md
              test_directory
              action.yml
              **/*.py
