@@ -20,6 +20,7 @@ jobs:
         id: modified_files
         run: |
           echo "::set-output name=files::$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }})"
+          echo "${{ steps.modified_files.outputs.files }}"
       - name: Check if readme.md was modified
         run: |
           if echo "${{ steps.modified_files.outputs.files }}" | grep -q "README.md"; then
