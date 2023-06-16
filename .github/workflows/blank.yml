@@ -26,7 +26,7 @@ jobs:
           echo "::save-state name=files::$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }})"
       - name: Check if readme.md was modified
         run: |
-          if echo "${{ steps.modified_files.outputs.files }}" | grep -q "readme.md"; then
+          if echo "${{ steps.modified_files.outputs.files }}" | grep -q "README.md"; then
             echo "readme.md was modified"
           else
             echo "readme.md was not modified"
