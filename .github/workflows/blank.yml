@@ -49,7 +49,7 @@ jobs:
     steps:
     - name: Get pull request comments
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
       run: |
         comments=$(curl -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/vnd.github+json" -s "${{ github.event.pull_request.comments_url }}" | jq -r '.[].body')
         echo "sdfsdf $comments"
