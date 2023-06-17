@@ -25,7 +25,7 @@ jobs:
           echo "${{ steps.modified_files.outputs.files }}"
       - name: Check if readme.md was modified
         run: |
-          if echo "${{ steps.modified_files.outputs.files }}" | grep -q "README.md"; then
+          if [[ "${{ steps.modified_files.outputs.files }}" == "README.md" ]]; then
             echo "readme.md was modified"
           else
             echo "readme.md was not modified"
