@@ -27,8 +27,10 @@ jobs:
       - name: Check if readme.md was modified
         run: |
           if [[ "${{ steps.modified_files.outputs.files }}" == "README.md" ]]; then
+            echo "valid=true" >> $GITHUB_OUTPUT
             echo "readme.md was modified"
           else
+            echo "valid=false" >> $GITHUB_OUTPUT
             echo "readme.md was not modified"
           fi
   print_comment:
