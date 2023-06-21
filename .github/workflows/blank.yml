@@ -21,11 +21,8 @@ jobs:
         id: modified_files
         run: |
           files=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} | tr -d '\n')
-          echo "files=$files" >> $GITHUB_OUTPUT
-      - name: Check if readme.md was modified
-        id: chk123
-        run: |
-          if [[ "${{ steps.modified_files.outputs.files }}" == "README.md" ]]; then
+
+          if [[ "$files" == "README.md" ]]; then
             echo "valid=true" >> $GITHUB_OUTPUT
             echo "readme.md was modified"
           else
