@@ -31,9 +31,7 @@ jobs:
         run: |
           if [[ "${{ steps.modified_files.outputs.files }}" == "README.md" ]]; then
             echo "readme.md was modified"
-            echo "valid=true" >> $GITHUB_OUTPUT
           else
             echo "readme.md was not modified"
-            echo "valid=false" >> $GITHUB_OUTPUT
           fi
   
