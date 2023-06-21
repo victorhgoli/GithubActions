@@ -20,7 +20,7 @@ jobs:
       - name: Get list of modified files
         id: modified_files
         run: |
-          files=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} | tr '\n' ' ')
+          files=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} | tr '\n' '')
           echo "files=$files" >> $GITHUB_OUTPUT
       - name: Check if readme.md was modified
         id: chk123
