@@ -11,8 +11,6 @@ jobs:
   
   check_modified_files:
     runs-on: ubuntu-latest
-    outputs:
-      teste: ${{steps.teste.outputs.valid}}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -27,11 +25,18 @@ jobs:
           files=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} | tr '\n' ' ')
           echo "files=$files" >> $GITHUB_OUTPUT
       - name: Check if readme.md was modified
-        id: teste
         run: |
           if [[ "${{ steps.modified_files.outputs.files }}" == "README.md" ]]; then
             echo "readme.md was modified"
           else
             echo "readme.md was not modified"
           fi
-  
+  print_comment:
+    runs-on: ubuntu-latest        
+    steps:
+    - name: Get pull request comments
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      run: |
+        description="${{ github.event.pull_request.body }}"
+        echo "$description"
