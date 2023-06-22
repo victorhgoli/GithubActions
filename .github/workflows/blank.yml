@@ -20,9 +20,11 @@ jobs:
       - name: Validate changes
         id: validate-only-readme-change
         run: |
-          files=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }} | tr -d '\n')
+          files=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }})
           echo "Modified files: $files"
-          if [[ "$files" == "README.md" ]]; then
+          files_str = $($files  | tr -d '\n')
+          echo "str files: $files_str"
+          if [[ "$files_str" == "README.md" ]]; then
             echo "valid=true" >> $GITHUB_OUTPUT
             echo "readme.md was modified"
           fi
