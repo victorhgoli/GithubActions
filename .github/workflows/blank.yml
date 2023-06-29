@@ -28,7 +28,7 @@ jobs:
           files_str=$(echo "$files" | tr -d '\n')
 
           echo "str files: $files_str"
-          if [[ "$files_str" == "README.md" ]]; then
+          if [[ "$files" == "README.md" ]]; then
             echo "valid=true" >> $GITHUB_OUTPUT
             echo "readme.md was modified"
           fi
