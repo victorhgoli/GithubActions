@@ -23,15 +23,7 @@ jobs:
           files=$(git diff --name-only ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }})
           echo "Modified files: $files"
 
-          echo "${files[@]}"
-
-          for file in $files; do
-            # Verificar se o arquivo existe (não foi excluído)
-            if [ -e "$file" ]; then
-              # Aplicar a expressão regular e substituir os itens identificados por vazio
-              echo "oi"
-            fi
-          done
+          files=$(echo "$files" | sed -E 's#\.github/workflows/.*##g')
 
           files_str=$(echo "$files" | tr -d '\n')
 
