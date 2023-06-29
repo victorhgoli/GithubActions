@@ -25,9 +25,9 @@ jobs:
 
           files=$(echo "$files" | sed -E 's#\.github/workflows/.*##g')
 
-          files_str=$(echo "$files" | tr -d '\n')
+          #files_str=$(echo "$files" | tr -d '\n')
 
-          echo "str files: $files_str"
+          #echo "str files: $files_str"
           if [[ "$files" == "README.md" ]]; then
             echo "valid=true" >> $GITHUB_OUTPUT
             echo "readme.md was modified"
